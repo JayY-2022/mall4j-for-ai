@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yami.shop.dao.McpToolMapper">
+
+    <select id="listByServerId" resultType="com.yami.shop.bean.model.McpTool">
+        SELECT * FROM mcp_tools WHERE server_id = #{serverId} ORDER BY tool_name
+    </select>
+
+    <select id="getByServerIdAndToolName" resultType="com.yami.shop.bean.model.McpTool">
+        SELECT * FROM mcp_tools WHERE server_id = #{serverId} AND tool_name = #{toolName}
+    </select>
+
+    <delete id="deleteByServerId">
+        DELETE FROM mcp_tools WHERE server_id = #{serverId}
+    </delete>
+
+</mapper>
+

@@ -1,0 +1,77 @@
+# Docker Compose 配置 - 使用外部MySQL和Redis
+# 使用方法: docker-compose -f docker-compose.external-db.yml up -d
+
+version: '3'
+services:
+  mall4j-admin:
+    build:
+      context: ./
+      dockerfile: ./yami-shop-admin/Dockerfile
+    restart: always
+    container_name: mall4j-admin
+    environment:
+      # 从环境变量读取，支持.env文件
+      - REDIS_HOST=${REDIS_HOST:-mall4j-cache-redis.ns-admin.svc}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - REDIS_DATABASE=${REDIS_DATABASE:-0}
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      - MYSQL_HOST=${MYSQL_HOST:-mall4j-db-mysql.ns-admin.svc}
+      - MYSQL_PORT=${MYSQL_PORT:-3306}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-yami_shops}
+      - MYSQL_USERNAME=${MYSQL_USERNAME:-root}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-}
+    image: mall4j-admin
+    ports:
+      - 8085:8085
+    volumes:
+      - ./IMG:/root/cb/mall4j/IMG
+    # 移除depends_on，因为使用外部存储
+
+  mall4j-api:
+    build:
+      context: ./
+      dockerfile: ./yami-shop-api/Dockerfile
+    restart: always
+    container_name: mall4j-api
+    environment:
+      # 从环境变量读取，支持.env文件
+      - REDIS_HOST=${REDIS_HOST:-mall4j-cache-redis.ns-admin.svc}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - REDIS_DATABASE=${REDIS_DATABASE:-0}
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      - MYSQL_HOST=${MYSQL_HOST:-mall4j-db-mysql.ns-admin.svc}
+      - MYSQL_PORT=${MYSQL_PORT:-3306}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-yami_shops}
+      - MYSQL_USERNAME=${MYSQL_USERNAME:-root}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-}
+    image: mall4j-api
+    ports:
+      - 8086:8086
+    volumes:
+      - ./IMG:/root/cb/mall4j/IMG
+    # 移除depends_on，因为使用外部存储
+
+  mall4v-frontend:
+    build:
+      context: ./front-end/mall4v
+      dockerfile: Dockerfile
+    restart: always
+    container_name: mall4v-frontend
+    ports:
+      - 80:80
+    depends_on:
+      - mall4j-admin
+    image: mall4v-frontend
+
+  mall4uni-frontend:
+    build:
+      context: ./
+      dockerfile: ./front-end/mall4uni/Dockerfile
+    restart: always
+    container_name: mall4uni-frontend
+    ports:
+      - 81:80
+    depends_on:
+      - mall4j-api
+    image: mall4uni-frontend
+

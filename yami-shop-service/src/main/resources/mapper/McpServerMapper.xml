@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yami.shop.dao.McpServerMapper">
+
+    <select id="listActiveServers" resultType="com.yami.shop.bean.model.McpServer">
+        SELECT * FROM mcp_servers WHERE status = 1 ORDER BY create_time
+    </select>
+
+    <select id="getByServerId" resultType="com.yami.shop.bean.model.McpServer">
+        SELECT * FROM mcp_servers WHERE server_id = #{serverId}
+    </select>
+
+    <update id="updateStatus">
+        UPDATE mcp_servers SET status = #{status}, last_checked = NOW() WHERE server_id = #{serverId}
+    </update>
+
+    <update id="updateHealthCheck">
+        UPDATE mcp_servers SET last_checked = NOW(), retry_backoff = #{retryBackoff} WHERE server_id = #{serverId}
+    </update>
+
+</mapper>
+

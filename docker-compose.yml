@@ -1,0 +1,102 @@
+version: '3'
+services:
+  mall4j-mysql:
+    build:
+      context: ./
+      dockerfile: ./db/Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: yami_shops
+    restart: always
+    container_name: mall4j-mysql
+    image: mall4j-mysql
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mall4j-mysql:/var/lib/mysql
+    command: --lower_case_table_names=1
+
+  mall4j-redis:
+    image: redis:5.0.4
+    restart: always
+    container_name: mall4j-redis
+    ports:
+      - 6379:6379
+
+  mall4j-admin:
+    build:
+      context: ./
+      dockerfile: ./yami-shop-admin/Dockerfile
+    restart: always
+    container_name: mall4j-admin
+    environment:
+      - REDIS_HOST=mall4j-redis
+      - REDIS_PORT=6379
+      - REDIS_DATABASE=0
+      - MYSQL_HOST=mall4j-mysql
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=yami_shops
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD=root
+    image: mall4j-admin
+    ports:
+      - 8085:8085
+    volumes:
+      - ./IMG:/root/cb/mall4j/IMG
+    depends_on:
+      - mall4j-redis
+      - mall4j-mysql
+    links:
+      - "mall4j-redis"
+      - "mall4j-mysql"
+
+  mall4j-api:
+    build:
+      context: ./
+      dockerfile: ./yami-shop-api/Dockerfile
+    restart: always
+    container_name: mall4j-api
+    environment:
+      - REDIS_HOST=mall4j-redis
+      - REDIS_PORT=6379
+      - REDIS_DATABASE=0
+      - MYSQL_HOST=mall4j-mysql
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=yami_shops
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD=root
+    image: mall4j-api
+    ports:
+      - 8086:8086
+    volumes:
+      - ./IMG:/root/cb/mall4j/IMG
+    depends_on:
+      - mall4j-redis
+      - mall4j-mysql
+    links:
+      - "mall4j-redis"
+      - "mall4j-mysql"
+
+  mall4v-frontend:
+    build:
+      context: ./front-end/mall4v
+      dockerfile: Dockerfile
+    restart: always
+    container_name: mall4v-frontend
+    ports:
+      - 80:80
+    depends_on:
+      - mall4j-admin
+    image: mall4v-frontend
+
+  mall4uni-frontend:
+    build:
+      context: ./
+      dockerfile: ./front-end/mall4uni/Dockerfile
+    restart: always
+    container_name: mall4uni-frontend
+    ports:
+      - 81:80
+    depends_on:
+      - mall4j-api
+    image: mall4uni-frontend
