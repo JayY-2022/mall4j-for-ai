@@ -1,6 +1,9 @@
 /*
  * Chatbot conversation history table
  */
+
+-- 设置字符集为utf8mb4，确保中文正确显示
+SET NAMES utf8mb4;
 CREATE TABLE IF NOT EXISTS `chatbot_conversation` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `user_id` varchar(64) NOT NULL COMMENT '用户ID',

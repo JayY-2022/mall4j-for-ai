@@ -8,7 +8,7 @@ create database IF NOT EXISTS `yami_shops` default character set utf8mb4 collate
 
 USE yami_shops;
 
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 /*!40101 SET SQL_MODE=''*/;
 

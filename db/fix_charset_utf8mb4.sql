@@ -3,6 +3,9 @@
 -- 解决中文乱码问题
 -- ============================================
 
+-- 设置字符集为utf8mb4，确保中文正确显示
+SET NAMES utf8mb4;
+
 -- 1. 修复数据库默认字符集
 ALTER DATABASE `yami_shops` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

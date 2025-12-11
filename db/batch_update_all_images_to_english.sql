@@ -1,6 +1,9 @@
 -- 批量更新图片文件名：中文 -> 英文
 -- 自动生成脚本
 
+-- 设置字符集为utf8mb4，确保中文正确显示
+SET NAMES utf8mb4;
+
 START TRANSACTION;
 
 -- 更新文件: 图书文具_cat06_prod001_Kindle_电子书_6c3ae3pz.jpg -> Stationery_cat06_prod001_Kindle_E-Book_6c3ae3pz.jpg

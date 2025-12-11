@@ -2,6 +2,9 @@
  * 添加智能客服配置菜单项
  */
 
+-- 设置字符集为utf8mb4，确保中文正确显示
+SET NAMES utf8mb4;
+
 -- 添加菜单项（如果不存在）
 INSERT INTO `tz_sys_menu` (`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
 SELECT 317, 1, '智能客服配置', 'admin/chatbot-config', 'sys:chatbot:config', 1, 'service', 8

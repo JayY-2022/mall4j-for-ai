@@ -3,6 +3,9 @@ MCP Server 相关表结构
 用于支持 MCP (Model Context Protocol) 工具接入
 */
 
+-- 设置字符集为utf8mb4，确保中文正确显示
+SET NAMES utf8mb4;
+
 USE yami_shops;
 
 /* 表结构：MCP 服务器注册表 */

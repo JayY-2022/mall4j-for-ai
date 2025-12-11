@@ -1,0 +1,2 @@
+IMG/**/*.{jpg,jpeg,png,gif,webp} filter=lfs diff=lfs merge=lfs -text
+root/**/*.{jpg,jpeg,png,gif,webp} filter=lfs diff=lfs merge=lfs -text

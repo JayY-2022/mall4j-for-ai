@@ -61,3 +61,31 @@ node_modules
 
 ### vscode ###
 .vscode
+
+### maven local repository ###
+.m2/
+
+### mysql database files ###
+mall4j-mysql/
+
+### environment configuration files ###
+.env
+.env.local
+.env.*.local
+
+### pnpm store ###
+.pnpm-store/
+
+### uploaded files directory ###
+# Note: Image files in root/ are tracked by Git LFS (see .gitattributes)
+# Ignore all files in root/ except image files
+root/**/*
+!root/**/*.jpg
+!root/**/*.jpeg
+!root/**/*.png
+!root/**/*.gif
+!root/**/*.webp
+
+### image directory ###
+# Note: Image files in IMG/ are tracked by Git LFS (see .gitattributes)
+# IMG/ directory is NOT ignored - all image files will be tracked via Git LFS

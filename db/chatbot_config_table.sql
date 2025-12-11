@@ -1,6 +1,9 @@
 /*
  * Chatbot configuration table
  */
+
+-- 设置字符集为utf8mb4，确保中文正确显示
+SET NAMES utf8mb4;
 CREATE TABLE IF NOT EXISTS `chatbot_config` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `url` varchar(255) DEFAULT NULL COMMENT 'Agent 服务地址',

@@ -1,6 +1,9 @@
 -- 为 chatbot_config 表添加 api_key 字段
 -- 如果字段已存在，此脚本会报错，可以忽略
 
+-- 设置字符集为utf8mb4，确保中文正确显示
+SET NAMES utf8mb4;
+
 -- 检查字段是否存在，如果不存在则添加
 SET @dbname = DATABASE();
 SET @tablename = 'chatbot_config';

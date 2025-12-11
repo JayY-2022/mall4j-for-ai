@@ -4,6 +4,9 @@
 -- 商品ID：78（下一个可用ID）
 -- SKU ID：405（下一个可用ID）
 
+-- 设置字符集为utf8mb4，确保中文正确显示
+SET NAMES utf8mb4;
+
 -- 1. 插入商品主表 tz_prod
 INSERT INTO `tz_prod` (
     `prod_id`,
