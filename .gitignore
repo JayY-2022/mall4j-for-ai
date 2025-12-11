@@ -89,3 +89,15 @@ root/**/*
 ### image directory ###
 # Note: Image files in IMG/ are tracked by Git LFS (see .gitattributes)
 # IMG/ directory is NOT ignored - all image files will be tracked via Git LFS
+
+### db documentation files ###
+# Ignore markdown documentation files in db/ directory
+db/**/*.md
+
+### project documentation and scripts ###
+# Ignore project documentation and local scripts
+GIT_IGNORE_ANALYSIS.md
+PRODUCTION_DATA_IMPORT_SUMMARY.md
+start_all_in_pod.sh
+start_with_external_db.sh
+stop_all_in_pod.sh
