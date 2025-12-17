@@ -101,3 +101,15 @@ PRODUCTION_DATA_IMPORT_SUMMARY.md
 start_all_in_pod.sh
 start_with_external_db.sh
 stop_all_in_pod.sh
+
+### temporary fix documentation ###
+# Ignore all temporary documentation and helper scripts
+QUICK_FIX_SUMMARY.md
+verify_images.sh
+pre-commit-check.sh
+COMMIT_CHECKLIST.md
+READY_TO_COMMIT.md
+IMAGE_FIX_GUIDE.md
+COMMIT_COMMANDS.txt
+FINAL_COMMIT_LIST.txt
+*.md.backup

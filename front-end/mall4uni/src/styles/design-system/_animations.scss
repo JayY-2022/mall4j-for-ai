@@ -1,0 +1,288 @@
+/**
+ * 设计系统 - 动画定义
+ * 
+ * 本文件定义了应用中使用的所有动画效果
+ * Requirements: 7.1, 7.2, 7.3
+ */
+
+// ============================================
+// 关键帧动画定义
+// ============================================
+
+/**
+ * slideUp - 从底部滑入动画
+ * 用于弹窗、抽屉等从底部出现的元素
+ */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/**
+ * fadeIn - 淡入动画
+ * 用于页面过渡、内容加载等场景
+ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/**
+ * scaleDown - 缩小动画
+ * 用于按钮点击反馈、卡片交互等
+ */
+@keyframes scaleDown {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/**
+ * shimmer - 闪烁动画
+ * 用于骨架屏加载效果
+ */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/**
+ * pulse - 脉冲动画
+ * 用于徽章、通知等需要吸引注意力的元素
+ */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+// ============================================
+// 按钮点击反馈样式
+// ============================================
+
+/**
+ * 按钮点击反馈 Mixin
+ * 为按钮添加点击时的缩放反馈效果
+ * 
+ * 使用方法:
+ * .my-button {
+ *   @include button-feedback;
+ * }
+ */
+@mixin button-feedback {
+  transition: transform $duration-fast $ease-out;
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/**
+ * 按钮点击反馈类
+ * 可直接应用到按钮元素上
+ */
+.btn-feedback {
+  @include button-feedback;
+}
+
+/**
+ * 按钮点击反馈 - 带阴影变化
+ * 点击时缩小并减少阴影，增强按下感
+ */
+@mixin button-feedback-shadow {
+  transition: transform $duration-fast $ease-out, 
+              box-shadow $duration-fast $ease-out;
+  
+  &:active {
+    transform: scale(0.98);
+    box-shadow: $shadow-sm;
+  }
+}
+
+.btn-feedback-shadow {
+  @include button-feedback-shadow;
+}
+
+// ============================================
+// 卡片悬停效果样式
+// ============================================
+
+/**
+ * 卡片悬停效果 Mixin
+ * 为卡片添加悬停时的阴影提升效果
+ * 注意: uni-app 在移动端不支持 hover，此效果主要用于 H5
+ * 
+ * 使用方法:
+ * .my-card {
+ *   @include card-hover;
+ * }
+ */
+@mixin card-hover {
+  transition: transform $duration-normal $ease-out,
+              box-shadow $duration-normal $ease-out;
+  
+  &:hover {
+    transform: translateY(-4rpx);
+    box-shadow: $shadow-lg;
+  }
+}
+
+.card-hover {
+  @include card-hover;
+}
+
+/**
+ * 卡片点击效果 Mixin
+ * 为卡片添加点击时的缩放反馈（移动端友好）
+ */
+@mixin card-press {
+  transition: transform $duration-fast $ease-out,
+              box-shadow $duration-fast $ease-out;
+  
+  &:active {
+    transform: scale(0.98);
+    box-shadow: $shadow-md;
+  }
+}
+
+.card-press {
+  @include card-press;
+}
+
+/**
+ * 卡片完整交互效果
+ * 结合悬停和点击效果
+ */
+@mixin card-interactive {
+  transition: transform $duration-normal $ease-out,
+              box-shadow $duration-normal $ease-out;
+  
+  // H5 悬停效果
+  &:hover {
+    transform: translateY(-4rpx);
+    box-shadow: $shadow-lg;
+  }
+  
+  // 移动端点击效果
+  &:active {
+    transform: scale(0.98);
+    box-shadow: $shadow-md;
+  }
+}
+
+.card-interactive {
+  @include card-interactive;
+}
+
+// ============================================
+// 页面过渡动画类
+// ============================================
+
+/**
+ * 页面淡入过渡
+ * 用于页面切换时的淡入效果
+ */
+.page-fade-in {
+  animation: fadeIn $duration-normal $ease-out;
+}
+
+/**
+ * 页面从底部滑入
+ * 用于模态框、抽屉等从底部出现的页面
+ */
+.page-slide-up {
+  animation: slideUp $duration-normal $ease-out;
+}
+
+// ============================================
+// 加载动画类
+// ============================================
+
+/**
+ * 骨架屏闪烁效果
+ */
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.5) 50%,
+      transparent 100%
+    );
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+/**
+ * 脉冲效果
+ * 用于徽章、通知等
+ */
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+// ============================================
+// 性能优化
+// ============================================
+
+/**
+ * GPU 加速
+ * 为需要动画的元素启用硬件加速
+ */
+@mixin gpu-accelerated {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.gpu-accelerated {
+  @include gpu-accelerated;
+}
+
+/**
+ * 减少动画 - 尊重用户偏好设置
+ * 当用户系统设置为减少动画时，禁用或缩短动画
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

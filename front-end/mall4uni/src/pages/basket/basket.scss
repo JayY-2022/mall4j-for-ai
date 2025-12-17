@@ -1,3 +1,5 @@
+@use "@/styles/variables.scss" as *;
+
 .container {
   width: 100%;
   background: #f4f4f4;
@@ -31,22 +33,23 @@
     background: #fff;
     display: flex;
     align-items: center;
-    padding: 20rpx;
+    padding: $spacing-3;
+    margin: $spacing-2 $spacing-3;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-sm;
+    transition: all $duration-normal $ease-out;
+    
+    &:active {
+      transform: scale(0.99);
+      box-shadow: $shadow-md;
+    }
+    
     .prodinfo {
       position: relative;
       color: #999;
       width: 100%;
       &::after {
-        content: '';
-        background-color: #f4f4f4;
-        left: 0;
-        height: 1px;
-        transform-origin: 50% 100% 0;
-        bottom: -20rpx;
-        position: absolute;
-        display: block;
-        width: 642rpx;
-        padding-left: 20rpx;
+        display: none; // Remove separator line for modern card style
       }
       .pic {
         text-align: center;
@@ -54,6 +57,8 @@
         height: 180rpx;
         line-height: 180rpx;
         font-size: 0;
+        border-radius: $radius-md;
+        overflow: hidden;
       }
     }
     &:last-child {
@@ -80,6 +85,7 @@
         max-width: 100%;
         max-height: 100%;
         vertical-align: middle;
+        border-radius: $radius-md;
       }
     }
   }
@@ -181,12 +187,14 @@
     float: left;
     box-sizing: border-box;
     height: 56rpx;
-    border: 2rpx solid #d9d9d9;
+    border: 2rpx solid $color-gray-300;
     position: relative;
     width: 56rpx;
     border-right: 0;
-    border-top-left-radius: 4rpx;
-    border-bottom-left-radius: 4rpx;
+    border-top-left-radius: $radius-md;
+    border-bottom-left-radius: $radius-md;
+    background: #fff;
+    transition: all $duration-fast $ease-out;
     &::before {
       position: absolute;
       top: 0;
@@ -197,28 +205,34 @@
       content: ' ';
       width: 22rpx;
       height: 3rpx;
-      background-color: #7f7f7f;
+      background-color: $color-gray-600;
     }
   }
   input {
     float: left;
     box-sizing: border-box;
     height: 56rpx;
-    border: 2rpx solid #d9d9d9;
+    border: 2rpx solid $color-gray-300;
+    border-left: 0;
+    border-right: 0;
     width: 56rpx;
     text-align: center;
-    color: #333;
+    color: $color-gray-800;
+    font-weight: 500;
+    background: #fff;
   }
   .plus {
     float: left;
     box-sizing: border-box;
     height: 56rpx;
-    border: 2rpx solid #d9d9d9;
+    border: 2rpx solid $color-gray-300;
     position: relative;
     width: 56rpx;
     border-left: 0;
-    border-top-right-radius: 4rpx;
-    border-bottom-right-radius: 4rpx;
+    border-top-right-radius: $radius-md;
+    border-bottom-right-radius: $radius-md;
+    background: #fff;
+    transition: all $duration-fast $ease-out;
     &::before {
       position: absolute;
       top: 0;
@@ -229,7 +243,7 @@
       content: ' ';
       width: 22rpx;
       height: 3rpx;
-      background-color: #7f7f7f;
+      background-color: $color-gray-600;
     }
     &::after {
       position: absolute;
@@ -241,7 +255,7 @@
       content: ' ';
       width: 22rpx;
       height: 3rpx;
-      background-color: #7f7f7f;
+      background-color: $color-gray-600;
       transform: rotate(90deg);
     }
   }
@@ -250,14 +264,18 @@
     .minus {
       &:not(.disabled) {
         &:active {
-          background-color: #f4f4f4;
+          background-color: $color-gray-100;
+          border-color: $color-primary;
+          transform: scale(0.95);
         }
       }
     }
     .plus {
       &:not(.disabled) {
         &:active {
-          background-color: #f4f4f4;
+          background-color: $color-gray-100;
+          border-color: $color-primary;
+          transform: scale(0.95);
         }
       }
     }
@@ -284,19 +302,44 @@
   }
 }
 .empty {
-  font-size: 26rpx;
-  color: #aaa;
+  font-size: $font-sm;
+  color: $color-gray-400;
   padding-top: 200rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
   .txt {
     text-align: center;
-    margin-top: 30rpx;
+    margin-top: $spacing-4;
+    font-size: $font-base;
+    color: $color-gray-500;
+    line-height: 1.6;
   }
   .img {
     margin-top: 80rpx;
     text-align: center;
     image {
-      width: 80rpx;
-      height: 80rpx;
+      width: 160rpx;
+      height: 160rpx;
+      opacity: 0.6;
+    }
+  }
+  
+  // Optional: Add a call-to-action button for empty state
+  .empty-action {
+    margin-top: $spacing-6;
+    padding: $spacing-3 $spacing-6;
+    background: $color-primary-gradient;
+    color: #fff;
+    border-radius: $radius-full;
+    font-size: $font-base;
+    font-weight: 500;
+    transition: all $duration-fast $ease-out;
+    
+    &:active {
+      transform: scale(0.95);
+      opacity: 0.9;
     }
   }
 }
@@ -313,8 +356,17 @@
   display: flex;
   flex-direction: row nowrap;
   height: 98rpx;
-  border-top: 2rpx solid #f4f4f4;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.2);
   z-index: 999;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20rpx);
+  -webkit-backdrop-filter: blur(20rpx);
+  
+  // Fallback for browsers that don't support backdrop-filter
+  @supports not (backdrop-filter: blur(20rpx)) {
+    background: rgba(255, 255, 255, 0.98);
+  }
+  
   .btn {
     position: relative;
     display: flex;
@@ -322,11 +374,10 @@
     justify-content: center;
     align-items: center;
     width: 0;
-    background-color: #fafafa;
-    background: rgba(255,255,255,0.95);
-    font-size: 28rpx;
+    font-size: $font-base;
     .total-msg {
-      font-size: 20rpx;
+      font-size: $font-xs;
+      color: $color-gray-500;
     }
   }
   .btn.total {
@@ -334,22 +385,24 @@
     flex-flow: column;
     align-items: flex-start;
     width: 300rpx;
+    padding-left: $spacing-3;
     .price {
-      color: #eb2444;
-      font-size: 30rpx;
+      color: $color-primary;
+      font-size: $font-lg;
+      font-weight: 600;
     }
   }
   .btn.del {
-    color: #eb2444;
+    color: $color-error;
     width: 70rpx;
-    font-size: 22rpx;
+    font-size: $font-xs;
     text-align: left;
     display: block;
     line-height: 102rpx;
   }
   .btn.all {
     width: 150rpx;
-    font-size: 26rpx;
+    font-size: $font-sm;
     label {
       display: flex;
       flex-grow: 1;
@@ -359,7 +412,14 @@
   }
   .btn.settle {
     width: 200rpx;
-    background: #eb2444;
+    background: $color-primary-gradient;
     color: #fff;
+    font-weight: 500;
+    transition: all $duration-fast $ease-out;
+    
+    &:active {
+      transform: scale(0.98);
+      opacity: 0.9;
+    }
   }
 }

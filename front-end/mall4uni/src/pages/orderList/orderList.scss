@@ -6,7 +6,7 @@
   color: #333;
 }
 .order-tit {
-  position: fixed;
+  position: sticky;
   top: 0;
   display: flex;
   justify-content: space-around;
@@ -30,6 +30,7 @@
 }
 .main {
   padding-top: 15rpx;
+  padding-bottom: 100rpx; /* 为底部留出空间，避免内容被遮挡 */
 }
 .prod-item {
   background-color: #fff;

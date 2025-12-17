@@ -1,3 +1,5 @@
+@use "@/styles/variables.scss" as *;
+
 .container {
   background: #f7f7f7;
   height: auto;
@@ -10,42 +12,71 @@ swiper {
   overflow: hidden;
 }
 swiper.pic-swiper {
-  padding: 10rpx 0;
+  padding: $spacing-3 0;
   background: #fff;
-  height: 422rpx;
+  height: 440rpx;
   .img-box {
     font-size: 0;
   }
   .banner {
     position: absolute;
-    width: 690rpx;
-    margin: 0 10rpx;
-    height: 402rpx;
-    border-radius: 8rpx;
+    width: 680rpx;
+    margin: 0 $spacing-2;
+    height: 400rpx;
+    border-radius: $radius-lg;
     display: inline-block;
-    box-shadow: 0 4px 10px 0 rgba(83, 83, 83, 0.288);
+    box-shadow: $shadow-md;
+    transition: transform $duration-normal $ease-out;
   }
 }
 swiper-item {
-  font-size: 26rpx;
+  font-size: $font-sm;
   font-weight: bold;
 }
 .wx-swiper-dots {
-  margin-bottom: 15rpx;
+  margin-bottom: $spacing-2;
 }
 .banner-item {
   box-sizing: border-box;
+}
+
+/* Price display styles */
+.price {
+  color: $color-primary;
+  font-family: Arial;
+  display: flex;
+  align-items: baseline;
+  
+  .symbol {
+    font-size: $font-sm;
+    margin-right: 2rpx;
+  }
+  
+  .big-num {
+    font-size: $font-xl;
+    font-weight: 600;
+  }
+  
+  .small-num {
+    font-size: $font-sm;
+  }
 }
 .container {
   .bg-sear {
     position: fixed;
     z-index: 999;
     width: 100%;
-    line-height: 56rpx;
-    background: #fff;
-    padding: 20rpx 0;
+    padding: $spacing-3 $spacing-4;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20rpx);
+    -webkit-backdrop-filter: blur(20rpx);
     text-align: center;
     top: 0;
+    
+    // Fallback for browsers that don't support backdrop-filter
+    @supports not (backdrop-filter: blur(20rpx)) {
+      background: rgba(255, 255, 255, 0.95);
+    }
   }
 }
 .bg-sear {
@@ -53,23 +84,29 @@ swiper-item {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60rpx;
-    background: #fff;
+    height: 72rpx;
+    background: $color-gray-100;
     z-index: 1;
-    border-radius: 50rpx;
+    border-radius: $radius-full;
     width: 92%;
     margin: auto;
-    left: 4%;
-    background: #f7f7f7;
+    padding: 0 $spacing-4;
+    transition: all $duration-fast $ease-out;
+    
+    &:active {
+      background: $color-gray-200;
+    }
+    
     .placeholder {
       display: block;
-      font-size: 24rpx;
-      color: #999;
+      font-size: $font-sm;
+      color: $color-gray-400;
     }
     .search-img {
-      width: 32rpx;
-      height: 32rpx;
-      margin-right: 10rpx;
+      width: 36rpx;
+      height: 36rpx;
+      margin-right: $spacing-2;
+      opacity: 0.5;
     }
   }
 }
@@ -80,24 +117,39 @@ swiper-item {
 }
 .cat-item {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   background: #fff;
-  padding-top: 20rpx;
-  padding-bottom: 30rpx;
+  padding: $spacing-4 $spacing-3;
   .item {
     text-align: center;
-    width: 25%;
     display: flex;
     flex-direction: column;
-    margin: auto;
     align-items: center;
+    transition: all $duration-fast $ease-out;
+    
+    &:active {
+      transform: scale(0.92);
+      
+      image {
+        box-shadow: $shadow-md;
+      }
+    }
+    
     image {
-      width: 75rpx;
-      height: 75rpx;
+      width: 88rpx;
+      height: 88rpx;
+      padding: $spacing-3;
+      background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);
+      border-radius: $radius-lg;
+      box-sizing: border-box;
+      box-shadow: $shadow-sm;
+      transition: all $duration-fast $ease-out;
     }
     text {
-      font-size: 26rpx;
-      margin-top: 20rpx;
+      font-size: $font-sm;
+      color: $color-gray-700;
+      margin-top: $spacing-2;
+      font-weight: 500;
     }
   }
 }
@@ -105,42 +157,51 @@ swiper-item {
 /* 消息播放 */
 .message-play {
   position: relative;
-  height: 90rpx;
+  height: 88rpx;
   background: #fff;
-  margin: auto;
+  margin: $spacing-3 $spacing-4;
   padding: 0 60rpx 0 100rpx;
   box-sizing: border-box;
-  box-shadow: 0 16rpx 32rpx 0 rgba(7, 17, 27, 0.05);
-  border: 2rpx solid #fafafa;
+  box-shadow: $shadow-sm;
+  border-radius: $radius-md;
+  border: 1rpx solid $color-gray-100;
+  transition: box-shadow $duration-fast $ease-out;
+  
+  &:active {
+    box-shadow: $shadow-md;
+  }
+  
   .hornpng {
     width: 77rpx;
     height: 36rpx;
     position: absolute;
-    left: 20rpx;
-    top: 27rpx;
-    margin-right: 8rpx;
+    left: $spacing-3;
+    top: 26rpx;
+    margin-right: $spacing-2;
   }
   .swiper-cont {
-    height: 90rpx;
-    line-height: 90rpx;
+    height: 88rpx;
+    line-height: 88rpx;
     .items {
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
       text-align: left;
+      font-size: $font-sm;
+      color: $color-gray-700;
     }
   }
 }
 .arrow {
-  width: 15rpx;
-  height: 15rpx;
-  border-top: 3rpx solid #686868;
-  border-right: 3rpx solid #686868;
+  width: 16rpx;
+  height: 16rpx;
+  border-top: 2rpx solid $color-gray-400;
+  border-right: 2rpx solid $color-gray-400;
   transform: rotate(45deg);
   position: absolute;
-  right: 30rpx;
-  top: 34rpx;
+  right: $spacing-4;
+  top: 36rpx;
 }
 
 /* 每日上新 */
@@ -148,29 +209,35 @@ swiper-item {
   position: relative;
   height: 64rpx;
   line-height: 64rpx;
-  font-size: 32rpx;
-  padding: 40rpx 0 10rpx 30rpx;
-  color: #333;
+  font-size: $font-lg;
+  font-weight: 600;
+  padding: $spacing-5 0 $spacing-2 $spacing-4;
+  color: $color-gray-800;
   background: #fff;
   .more-prod-cont {
-    color: #999;
+    color: $color-gray-400;
     display: inline-block;
     text-align: right;
     .more {
       position: absolute;
-      right: 30rpx;
+      right: $spacing-4;
       top: 48rpx;
-      color: #666;
-      font-size: 24rpx;
-      padding: 0 20rpx;
+      color: $color-gray-600;
+      font-size: $font-sm;
+      padding: 0 $spacing-3;
       height: 44rpx;
       line-height: 44rpx;
+      transition: color $duration-fast $ease-out;
+      
+      &:active {
+        color: $color-primary;
+      }
     }
     .arrow {
       top: 58rpx;
-      right: 30rpx;
-      border-top: 2rpx solid #666;
-      border-right: 2rpx solid #666;
+      right: $spacing-4;
+      border-top: 2rpx solid $color-gray-600;
+      border-right: 2rpx solid $color-gray-600;
     }
   }
 }
@@ -181,15 +248,21 @@ swiper-item {
     .more-prod-cont {
       .more {
         position: absolute;
-        right: 30rpx;
+        right: $spacing-4;
         top: 48rpx;
         color: #fff;
-        font-size: 24rpx;
-        background: #65addf;
-        border-radius: 30rpx;
-        padding: 0 30rpx;
+        font-size: $font-sm;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10rpx);
+        border-radius: $radius-full;
+        padding: 0 $spacing-4;
         height: 44rpx;
         line-height: 44rpx;
+        transition: all $duration-fast $ease-out;
+        
+        &:active {
+          background: rgba(255, 255, 255, 0.3);
+        }
       }
     }
   }
@@ -201,128 +274,147 @@ swiper-item {
   .item-cont {
     margin: auto;
     height: auto;
-    width: calc(100% - 40rpx);
-    display: flex;
-    flex-wrap: wrap;
-    &::before {
-      clear: both;
-      height: 0;
-      overflow: hidden;
-    }
+    width: calc(100% - #{$spacing-5});
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-3;
+    padding: 0 $spacing-3 $spacing-3;
+    
     .prod-item {
-      border-radius: 10rpx;
-      width: 220rpx;
+      border-radius: $radius-lg;
       background: #fff;
-      display: inline-block;
-      margin: 0 8rpx;
-      margin-bottom: 20rpx;
-      box-shadow: 0rpx 6rpx 8rpx rgba(58,134,185,0.2);
+      box-shadow: $shadow-sm;
+      transition: all $duration-normal $ease-out;
+      overflow: hidden;
+      
+      &:active {
+        transform: scale(0.98);
+        box-shadow: $shadow-md;
+      }
+      
       .imagecont {
         width: 100%;
         font-size: 0;
-        width: 220rpx;
-        height: 220rpx;
+        aspect-ratio: 1;
+        overflow: hidden;
+        
         .prodimg {
-          width: 220rpx;
-          height: 220rpx;
+          width: 100%;
+          height: 100%;
           vertical-align: middle;
-          border-top-left-radius: 10rpx;
-          border-top-right-radius: 10rpx;
           font-size: 0;
+          object-fit: cover;
         }
       }
       .prod-text {
-        font-size: 28rpx;
+        font-size: $font-base;
         overflow: hidden;
-        margin: 10rpx 0;
-        height: 75rpx;
+        margin: $spacing-2 0;
+        height: 80rpx;
         display: -webkit-box;
         word-break: break-all;
-        display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
-        color: #000;
-        padding: 0 10rpx;
+        color: $color-gray-800;
+        padding: 0 $spacing-2;
+        line-height: 1.4;
       }
       .prod-price {
-        font-size: 25rpx;
-        color: #eb2444;
+        font-size: $font-sm;
+        color: $color-primary;
         font-family: Arial;
-        padding: 0 10rpx;
+        padding: 0 $spacing-2 $spacing-2;
+        font-weight: 600;
       }
     }
   }
 }
 .hotsale-item-cont {
-  padding-bottom: 20rpx;
+  padding: 0 $spacing-3 $spacing-3;
   background: #fff;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-3;
 }
 .more.prod-price {
   position: absolute;
-  bottom: 20rpx;
+  bottom: $spacing-3;
 }
 
 /* 商城热卖 */
 .hot-sale {
   .prod-items {
-    width: 345rpx;
-    display: inline-block;
     background: #fff;
-    padding-bottom: 20rpx;
     box-sizing: border-box;
-    box-shadow: 0rpx 6rpx 8rpx rgba(58,134,185,0.2);
-    &:nth-child(2n-1) {
-      margin: 20rpx 10rpx 10rpx 20rpx;
-    }
-    &:nth-child(2n) {
-      margin: 20rpx 20rpx 10rpx 10rpx;
+    box-shadow: $shadow-sm;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    transition: all $duration-normal $ease-out;
+    
+    &:active {
+      transform: scale(0.98);
+      box-shadow: $shadow-md;
     }
   }
 }
 .prod-items {
   .hot-imagecont {
-    width: 341rpx;
-    height: 341rpx;
-    .hotsaleimg {
-      width: 341rpx;
-      height: 341rpx;
-    }
+    width: 100%;
+    aspect-ratio: 1;
     font-size: 0;
     text-align: center;
+    overflow: hidden;
+    
+    .hotsaleimg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
   .hot-text {
+    padding: $spacing-3;
+    
     .hotprod-text {
-      font-size: 28rpx;
+      font-size: $font-base;
+      color: $color-gray-800;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      font-weight: 500;
     }
-    margin-top: 20rpx;
-    padding: 0 10rpx;
     .prod-info {
-      font-size: 22rpx;
-      color: #999;
+      font-size: $font-sm;
+      color: $color-gray-400;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      margin-top: $spacing-1;
     }
     .prod-text-info {
       position: relative;
       height: 70rpx;
       line-height: 70rpx;
       font-family: Arial;
+      margin-top: $spacing-2;
+      
       .hotprod-price {
         display: inline;
-        font-size: 26rpx;
-        color: #eb2444;
+        font-size: $font-lg;
+        color: $color-primary;
+        font-weight: 600;
       }
       .basket-img {
-        width: 50rpx;
-        height: 50rpx;
+        width: 56rpx;
+        height: 56rpx;
         position: absolute;
         right: 0;
         bottom: 7rpx;
-        padding: 8rpx;
+        padding: $spacing-2;
+        transition: transform $duration-fast $ease-out;
+        
+        &:active {
+          transform: scale(0.9);
+        }
       }
     }
   }
@@ -330,8 +422,8 @@ swiper-item {
 .more-prod {
   .prod-text-right {
     .prod-info {
-      font-size: 22rpx;
-      color: #999;
+      font-size: $font-sm;
+      color: $color-gray-400;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -340,74 +432,106 @@ swiper-item {
 }
 .singal-price {
   display: inline;
-  font-size: 20rpx;
+  font-size: $font-xs;
   text-decoration: line-through;
-  color: #777;
-  margin-left: 15rpx;
+  color: $color-gray-400;
+  margin-left: $spacing-2;
 }
 
 /* 更多宝贝 */
 .more-prod {
   background: #fff;
+  padding: 0 $spacing-3;
+  
   .prod-show {
     .show-item {
       .more-prod-pic {
         width: 250rpx;
         height: 250rpx;
+        border-radius: $radius-md;
+        overflow: hidden;
+        flex-shrink: 0;
+        
         .more-pic {
-          max-width: 100%;
-          max-height: 100%;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
       }
       position: relative;
       display: flex;
-      padding: 20rpx;
+      padding: $spacing-3 0;
       justify-content: flex-start;
-      border-top: 2rpx solid #f4f4f4;
+      border-top: 1rpx solid $color-gray-100;
+      transition: background $duration-fast $ease-out;
+      
+      &:first-child {
+        border-top: none;
+      }
+      
+      &:active {
+        background: $color-gray-50;
+      }
+      
       .prod-text-right {
-        margin-left: 30rpx;
-        width: 72%;
-        padding-bottom: 10rpx;
+        margin-left: $spacing-4;
+        flex: 1;
+        padding-bottom: $spacing-2;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        
         .go-to-buy {
-          font-size: 26rpx;
-          background: #fff2f5;
-          color: #eb2444;
-          border-radius: 50rpx;
+          font-size: $font-sm;
+          background: rgba($color-primary, 0.1);
+          color: $color-primary;
+          border-radius: $radius-full;
           text-align: center;
-          padding: 12rpx 20rpx;
+          padding: $spacing-2 $spacing-3;
           position: absolute;
-          right: 20rpx;
-          bottom: 20rpx;
+          right: 0;
+          bottom: $spacing-3;
+          transition: all $duration-fast $ease-out;
+          
+          &:active {
+            background: rgba($color-primary, 0.2);
+          }
         }
         .prod-text.more {
           margin: 0;
-          font-size: 28rpx;
+          font-size: $font-base;
+          color: $color-gray-800;
           overflow: hidden;
-          margin-bottom: 20rpx;
+          margin-bottom: $spacing-3;
           display: -webkit-box;
           word-break: break-all;
-          display: -webkit-box;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
+          line-height: 1.4;
         }
         .more.prod-price {
-          font-size: 28rpx;
+          font-size: $font-lg;
           font-family: arial;
+          color: $color-primary;
+          font-weight: 600;
         }
       }
     }
   }
 }
 .b-cart {
-  margin-top: 30rpx;
+  margin-top: $spacing-4;
+  
   .basket-img {
-    width: 50rpx;
-    height: 50rpx;
+    width: 56rpx;
+    height: 56rpx;
     position: absolute;
-    right: 46rpx;
-    padding: 8rpx;
+    right: 0;
+    padding: $spacing-2;
+    transition: transform $duration-fast $ease-out;
+    
+    &:active {
+      transform: scale(0.9);
+    }
   }
 }

@@ -14,16 +14,18 @@
   position: fixed;
   top: 0;
   left: 0;
-  color: #777;
-  background: #fff;
-  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.07);
+  color: $color-gray-600;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20rpx);
+  -webkit-backdrop-filter: blur(20rpx);
+  box-shadow: $shadow-sm;
   z-index: 3;
-  padding: 20rpx 0;
+  padding: $spacing-3 0;
   .arrow {
     width: 20rpx;
     height: 20rpx;
-    border-bottom: 2rpx solid #777;
-    border-left: 2rpx solid #777;
+    border-bottom: 2rpx solid $color-gray-600;
+    border-left: 2rpx solid $color-gray-600;
     transform: rotate(45deg);
     position: absolute;
     left: 30rpx;
@@ -33,21 +35,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60rpx;
-    background: #f7f7f7;
+    height: 72rpx;
+    background: $color-gray-100;
     z-index: 999;
     width: 92%;
-    border-radius: 50rpx;
+    border-radius: $radius-full;
     text-align: center;
     margin: auto;
+    transition: all $duration-fast $ease-out;
+    &:active {
+      background: $color-gray-200;
+      transform: scale(0.98);
+    }
     .search-img {
       width: 32rpx;
       height: 32rpx;
-      margin-right: 10rpx;
+      margin-right: $spacing-2;
+      opacity: 0.6;
     }
   }
   .search-hint {
-    font-size: 28rpx;
+    font-size: $font-base;
     position: absolute;
     right: 30rpx;
     top: 32rpx;
@@ -60,51 +68,55 @@
   width: 200rpx;
   height: 100%;
   box-sizing: border-box;
-  background-color: #f5f6f7;
+  background: linear-gradient(180deg, #F9FAFB 0%, #F3F4F6 100%);
   overflow: scroll;
   z-index: 2;
   .ca-empty {
     padding-top: 400rpx;
     text-align: center;
-    color: #aaa;
-    font-size: 24rpx;
+    color: $color-gray-400;
+    font-size: $font-sm;
   }
 }
 .menu-item {
   line-height: 90rpx;
   height: 90rpx;
   text-align: center;
-  border-bottom: 2rpx silid #e3e3e3;
   position: relative;
-  color: #777;
-  font-size: 28rpx;
+  color: $color-gray-600;
+  font-size: $font-base;
+  transition: all $duration-fast $ease-out;
   text.tips-num {
     position: absolute;
     top: 20rpx;
     right: 15rpx;
-    border-radius: 15rpx;
+    border-radius: $radius-full;
     width: 30rpx;
     height: 30rpx;
-    background: red;
+    background: $color-error;
     color: #fff;
-    font-size: 25rpx;
+    font-size: 22rpx;
     line-height: 30rpx;
   }
 }
 .menu-item.active {
-  color: #eb2444;
-  font-size: 28rpx;
-  font-weight: bold;
+  color: $color-primary;
+  font-size: $font-base;
+  font-weight: 600;
   position: relative;
   background: #fff;
+  border-radius: $radius-lg 0 0 $radius-lg;
+  margin-right: 8rpx;
+  box-shadow: $shadow-sm;
   &:before {
     position: absolute;
     left: 0;
     content: "";
-    width: 8rpx;
-    height: 32rpx;
-    top: 29rpx;
-    background: #eb2444;
+    width: 6rpx;
+    height: 40rpx;
+    top: 25rpx;
+    background: $color-primary-gradient;
+    border-radius: 0 $radius-sm $radius-sm 0;
   }
 }
 .rightcontent {
@@ -218,8 +230,18 @@
   }
 }
 .cont-item.empty {
-  display: block;
-  font-size: 24rpx;
-  color: #aaa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 200rpx;
+  font-size: $font-base;
+  color: $color-gray-400;
   text-align: center;
+  &:before {
+    content: "📦";
+    font-size: 120rpx;
+    margin-bottom: $spacing-4;
+    opacity: 0.3;
+  }
 }

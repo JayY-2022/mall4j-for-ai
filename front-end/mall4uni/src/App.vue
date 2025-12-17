@@ -50,4 +50,45 @@ uni-page-head {
 uni-swiper .uni-swiper-dots-horizontal {
   bottom: 20px !important;
 }
+
+/* ============================================
+   页面过渡动画
+   Requirements: 7.1
+   ============================================ */
+
+/* 页面淡入过渡动画 */
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 应用到所有页面 */
+page {
+  animation: pageFadeIn 250ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* 页面切换过渡效果 */
+.uni-page-wrapper {
+  animation: pageFadeIn 250ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* 为页面内容添加过渡 */
+.page-content {
+  animation: pageFadeIn 300ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* 减少动画 - 尊重用户偏好设置 */
+@media (prefers-reduced-motion: reduce) {
+  page,
+  .uni-page-wrapper,
+  .page-content {
+    animation-duration: 0.01ms !important;
+  }
+}
 </style>

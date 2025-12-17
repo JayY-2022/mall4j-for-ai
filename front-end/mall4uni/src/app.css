@@ -107,3 +107,196 @@ uni-radio .uni-radio-input.uni-radio-input-checked::before{
     padding-bottom: 70px;
   }
 }
+
+/* ============================================
+   全局按钮点击反馈
+   Requirements: 7.2
+   ============================================ */
+
+/* 通用按钮点击反馈 */
+button,
+.button,
+.btn,
+[class*="btn-"],
+[class*="button-"] {
+  transition: transform 150ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+button:active,
+.button:active,
+.btn:active,
+[class*="btn-"]:active,
+[class*="button-"]:active {
+  transform: scale(0.95);
+}
+
+/* 卡片类元素点击反馈 */
+.card,
+.item,
+.prod-item,
+.goods-item,
+[class*="card-"],
+[class*="item-"] {
+  transition: transform 150ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.card:active,
+.item:active,
+.prod-item:active,
+.goods-item:active,
+[class*="card-"]:active,
+[class*="item-"]:active {
+  transform: scale(0.98);
+}
+
+/* 图标按钮点击反馈 */
+.icon-btn,
+.icon-button,
+[class*="icon-btn"] {
+  transition: transform 150ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.icon-btn:active,
+.icon-button:active,
+[class*="icon-btn"]:active {
+  transform: scale(0.9);
+}
+
+/* 链接和可点击文本 */
+.link,
+.clickable,
+[class*="link-"] {
+  transition: opacity 150ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.link:active,
+.clickable:active,
+[class*="link-"]:active {
+  opacity: 0.6;
+}
+
+/* TabBar 项点击反馈 */
+.uni-tabbar-item {
+  transition: transform 150ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.uni-tabbar-item:active {
+  transform: scale(0.95);
+}
+
+/* 列表项点击反馈 */
+.list-item,
+.menu-item,
+[class*="list-item"],
+[class*="menu-item"] {
+  transition: background-color 150ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.list-item:active,
+.menu-item:active,
+[class*="list-item"]:active,
+[class*="menu-item"]:active {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* 减少动画 - 尊重用户偏好设置 */
+@media (prefers-reduced-motion: reduce) {
+  button,
+  .button,
+  .btn,
+  .card,
+  .item,
+  .icon-btn,
+  .link,
+  [class*="btn-"],
+  [class*="button-"],
+  [class*="card-"],
+  [class*="item-"],
+  [class*="icon-btn"],
+  [class*="link-"] {
+    transition-duration: 0.01ms !important;
+  }
+  
+  button:active,
+  .button:active,
+  .btn:active,
+  .card:active,
+  .item:active,
+  .icon-btn:active,
+  [class*="btn-"]:active,
+  [class*="button-"]:active,
+  [class*="card-"]:active,
+  [class*="item-"]:active,
+  [class*="icon-btn"]:active {
+    transform: none !important;
+  }
+}
+
+/* ============================================
+   列表滚动优化
+   Requirements: 7.5
+   ============================================ */
+
+/* 平滑滚动 - 适用于所有滚动容器 */
+page {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* scroll-view 组件优化 */
+scroll-view {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* 列表容器优化 */
+.list,
+.list-container,
+[class*="list-"] {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 优化滚动性能 - 使用 GPU 加速 */
+scroll-view,
+.scroll-container,
+.list-container {
+  will-change: scroll-position;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* 滚动条样式优化 (仅 H5) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* 滚动容器内的列表项优化 */
+scroll-view .item,
+scroll-view .list-item,
+.scroll-container .item,
+.scroll-container .list-item {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* 减少动画时禁用平滑滚动 */
+@media (prefers-reduced-motion: reduce) {
+  page,
+  scroll-view {
+    scroll-behavior: auto;
+  }
+}
